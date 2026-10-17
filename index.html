@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Miku Chess Royale</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <div class="brand-box">
+        <span class="brand-logo">♟️</span>
+        <div>
+          <h1 class="brand-title">MIKU CHESS ROYALE</h1>
+          <div class="room-pill">
+            <span id="connDot" class="conn-dot offline"></span>
+            <span id="connText">Connecting...</span>
+            <span>•</span>
+            <span>Room: <strong id="roomCodeLabel">----</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button id="soundToggleBtn" class="icon-btn" title="Mute/Unmute">🔊</button>
+        <button id="vsBotBtn" class="action-chip" title="Play vs Miku AI">🤖 vs AI</button>
+        <button id="resignBtn" class="action-chip danger-chip" title="Resign Match">🏳️ Resign</button>
+      </div>
+    </header>
+
+    <!-- Status Banner -->
+    <div id="statusBanner" class="status-banner">
+      ♟️ Waiting for opponent... Tap '🤖 vs AI' to play against Miku!
+    </div>
+
+    <!-- Top Player Card (Opponent) -->
+    <div id="topPlayerCard" class="player-card">
+      <div class="p-badge" id="topPieceBadge">⚫</div>
+      <div class="p-info">
+        <div class="p-name" id="topPlayerName">Waiting for Black...</div>
+        <div class="p-captured" id="topCaptured"></div>
+      </div>
+      <div class="turn-pill" id="topTurnPill">WAITING</div>
+    </div>
+
+    <!-- 8x8 Interactive Chess Board -->
+    <div class="board-container">
+      <div id="chessBoard" class="chess-board"></div>
+      <div id="floatingEmojiLayer" class="floating-emoji-layer"></div>
+    </div>
+
+    <!-- Bottom Player Card (You) -->
+    <div id="bottomPlayerCard" class="player-card">
+      <div class="p-badge" id="bottomPieceBadge">⚪</div>
+      <div class="p-info">
+        <div class="p-name" id="bottomPlayerName">You (White)</div>
+        <div class="p-captured" id="bottomCaptured"></div>
+      </div>
+      <div class="turn-pill" id="bottomTurnPill">YOUR TURN</div>
+    </div>
+
+    <!-- Bottom Reaction & Control Bar -->
+    <footer class="bottom-dock">
+      <div class="emoji-bar">
+        <button class="emoji-btn" data-emoji="🧠">🧠</button>
+        <button class="emoji-btn" data-emoji="🔥">🔥</button>
+        <button class="emoji-btn" data-emoji="😱">😱</button>
+        <button class="emoji-btn" data-emoji="😂">😂</button>
+        <button class="emoji-btn" data-emoji="👑">👑</button>
+        <button class="emoji-btn" data-emoji="👏">👏</button>
+      </div>
+      <button id="flipBoardBtn" class="action-chip">🔄 Flip</button>
+    </footer>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="gameOverModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="trophy-icon" id="modalIcon">🏆</div>
+      <h2 id="modalTitle">CHECKMATE!</h2>
+      <p id="modalSubtitle">White won the match!</p>
+      <div class="modal-actions">
+        <button id="rematchBtn" class="modal-btn primary">🔄 Play Again</button>
+        <button id="shareBtn" class="modal-btn secondary">📤 Share Result</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
